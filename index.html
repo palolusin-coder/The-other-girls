@@ -113,10 +113,15 @@
   .context-note{
     font-size:0.85rem;color:var(--ink-soft);max-width:60ch;margin:-8px 0 26px;
   }
-  #context-missing{
-    font-size:0.9rem;color:var(--ink-soft);padding:20px 0;font-style:italic;
-  }
 
+  .analysis-card{background:var(--card);padding:30px 34px;border:1px solid var(--line);}
+  .analysis-card p{font-size:0.98rem;line-height:1.7;margin:0 0 16px;max-width:78ch;}
+  .analysis-card p:last-of-type{margin-bottom:0;}
+  .citation{
+    margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);
+    font-size:0.8rem;color:var(--ink-soft);max-width:78ch;
+  }
+  .citation a{color:var(--matcha-dark);}
   footer{
     margin-top:80px;padding-top:24px;border-top:1px solid var(--line);
     font-size:0.8rem;color:var(--ink-soft);
@@ -181,15 +186,29 @@
     <div class="grid" id="grid-bienestar"></div>
   </section>
 
+  <section class="cluster">
+    <div class="cluster-head"><h2>Diálogo con la literatura académica</h2><span class="n">05</span></div>
+    <div class="grid single">
+      <div class="analysis-card">
+        <p>Un estudio reciente publicado en <em>Frontiers in Computer Science</em> (Nazyrova et al., 2026) analizó más de 30 investigaciones sobre redes sociales y salud mental en mujeres, y las complementó con una encuesta propia a usuarias de entre 16 y 35 años. Su hallazgo central: a mayor tiempo diario de uso, mayores niveles de ansiedad, comparación social y descontento con la imagen corporal. En su muestra, alrededor del 70% notó más ansiedad tras un uso prolongado y cerca del 80% dijo estar expuesta con frecuencia a contenido centrado en la apariencia; quienes superaban las tres horas diarias mostraban niveles de ansiedad y comparación social notablemente más altos que quienes usaban menos de dos horas. También encontraron que un 40% había atravesado situaciones de ciberacoso, y de ese grupo, más de dos tercios reportó un aumento de la ansiedad.</p>
+        <p id="lit-propia">Cargando cruce con nuestros datos…</p>
+        <p id="lit-encc">Cargando cruce con la ENCC…</p>
+        <div class="citation">
+          Fuente: Nazyrova, A., Sergaziyev, M., Omarbekova, A., Sautbayeva, L., Akimjan, Z., &amp; Lamasheva, Z. (2026). <em>Digital anxiety: psychological effects of social media on women and a human-centered AI framework for mental health support</em>. Frontiers in Computer Science, 8:1780814. <a href="https://doi.org/10.3389/fcomp.2026.1780814" target="_blank" rel="noopener">doi.org/10.3389/fcomp.2026.1780814</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="context">
-    <div class="cluster-head"><h2>Contexto poblacional</h2><span class="n">ENCC</span></div>
-    <p class="context-note">Distribución general de la base ENCC, usada como referencia de composición demográfica — no corresponde a la muestra de la encuesta propia.</p>
+    <div class="cluster-head"><h2>Contexto poblacional</h2><span class="n">ENCC 2022-2023</span></div>
+    <p class="context-note">Distribución de la Encuesta Nacional de Consumos Culturales (2022-2023, n=3.380), usada como referencia demográfica y de acceso a internet — no corresponde a la muestra de la encuesta propia.</p>
+    <div class="kpis" id="kpis-contexto"></div>
     <div class="grid" id="grid-contexto"></div>
-    <div id="context-missing" style="display:none;">La hoja de contexto (ENCC) no pudo cargarse; el resto del dashboard funciona con la encuesta propia.</div>
   </section>
 
   <footer>
-    <span>Dashboard generado a partir de datos embebidos en vivo vía CSV público.</span>
+    <span>Encuesta propia: datos en vivo vía CSV público · Base ENCC: dataset embebido (n=3.380).</span>
     <span id="updated-at"></span>
   </footer>
 
@@ -199,7 +218,19 @@
 (() => {
   const BASE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQEJN8NdtYoMN5ai55CG9zO15YczGmA7g1LR1umzYhUMMHCYKt3biYG-kC_m3fbpVtAvF-lqqj3SbD7/pub?output=csv";
   const SHEET_ENCUESTA_URL = BASE_URL; // "respuestas de formulario 1", gid=1015627209
-  const SHEET_ENCC_URL = BASE_URL + "&gid=1178728568&single=true"; // "Base de datos ENCC"
+
+  // Base ENCC 2022-2023 — dataset real (n=3380), embebido directamente porque
+  // es un archivo estático que no vive en una URL pública. Resumido a
+  // distribuciones agregadas (no fila por fila) para mantener el HTML liviano.
+  const ENCC_DATA = {
+    n: 3380,
+    edadPromedio: 44.3,
+    region: {"GBA":620,"CENTRO":608,"NEA":448,"NOA":446,"PATAGONIA":439,"CUYO":431,"CABA":388},
+    genero: {"Mujer":2005,"Varón":1374,"No binario":1},
+    gruposEdad: {"13 a 17 años":203,"18 a 29 años":702,"30 a 49 años":1181,"50 a 64 años":691,"65 años y mas":603},
+    nivSocioe: {"ABC1":327,"C2+C3":1767,"D1+D2+E":1286},
+    usaInternet: {"SI":3102,"NO":278},
+  };
 
   const PALETTE = ["#8B9A6B","#C1685C","#B98F3E","#5F6E44","#8E7A9C","#4F6B8C","#A65C53","#6B7A8F"];
 
@@ -349,7 +380,6 @@
 
   function renderEncuesta(rows) {
     const data = rows.slice(1).filter((r) => r.length > 1 && r.some((c) => (c || "").toString().trim()));
-
     // KPIs
     const kpisEl = $("#kpis");
     kpisEl.innerHTML = "";
@@ -408,28 +438,62 @@
       makeCard(gBienestar, { title: "¿Frustración o culpa al no cumplir metas?" }),
       countBy(data, COL.frustracionCulpa)
     );
+
+    return data;
   }
 
-  // ---------- render: contexto ENCC ----------
+  // ---------- render: contexto ENCC (datos embebidos) ----------
 
-  const COL_ENCC = { region: 1, genero: 4, nivSocioe: 7 };
+  function objToDist(obj) {
+    return { labels: Object.keys(obj), values: Object.values(obj) };
+  }
 
-  function renderContexto(rows) {
-    const data = rows.slice(1).filter((r) => r.length > 1 && r.some((c) => (c || "").toString().trim()));
-    if (!data.length) throw new Error("empty");
+  function renderContexto() {
+    const kpisEl = $("#kpis-contexto");
+    kpisEl.innerHTML = "";
+    kpi(kpisEl, ENCC_DATA.n.toLocaleString("es-AR"), "personas relevadas (ENCC 2022-2023)");
+    kpi(kpisEl, ENCC_DATA.edadPromedio, "años, edad promedio");
+    const pctInternet = Math.round((ENCC_DATA.usaInternet.SI / ENCC_DATA.n) * 100);
+    kpi(kpisEl, pctInternet + "%", "usa internet");
+
     const gContexto = $("#grid-contexto");
     barChart(
       makeCard(gContexto, { title: "Distribución por región" }),
-      countBy(data, COL_ENCC.region), { color: PALETTE[4], horizontal: true, labelLen: 22 }
+      objToDist(ENCC_DATA.region), { color: PALETTE[4], horizontal: true, labelLen: 22 }
     );
     doughnutChart(
       makeCard(gContexto, { title: "Distribución por género" }),
-      countBy(data, COL_ENCC.genero)
+      objToDist(ENCC_DATA.genero)
     );
     barChart(
       makeCard(gContexto, { title: "Nivel socioeconómico" }),
-      countBy(data, COL_ENCC.nivSocioe), { color: PALETTE[5], horizontal: true }
+      objToDist(ENCC_DATA.nivSocioe), { color: PALETTE[5], horizontal: true }
     );
+    barChart(
+      makeCard(gContexto, { title: "Distribución por grupo etario" }),
+      objToDist(ENCC_DATA.gruposEdad), { color: PALETTE[6], horizontal: true }
+    );
+    doughnutChart(
+      makeCard(gContexto, { title: "¿Usa internet?" }),
+      objToDist(ENCC_DATA.usaInternet)
+    );
+  }
+
+  // ---------- render: cruce con la literatura académica ----------
+
+  function renderAnalisisCruzado(surveyData) {
+    const inspiracion = topAnswer(surveyData, COL.percepcionRealFalsa);
+    const culpa = topAnswer(surveyData, COL.frustracionCulpa);
+    const estereotipo = topAnswer(surveyData, COL.estereotipos);
+    const bienestar = topAnswer(surveyData, COL.bienestarCarga);
+
+    $("#lit-propia").innerHTML =
+      `En nuestra propia encuesta aparece un eco del mismo fenómeno: la respuesta más frecuente sobre la tendencia “That Girl” fue “${inspiracion.label}” (${inspiracion.pct}%), un ${culpa.pct}% respondió “${culpa.label}” al ser consultadas por frustración o culpa cuando no cumplen sus metas diarias, y un ${estereotipo.pct}% coincidió en que “${estereotipo.label}” respecto a los estereotipos de género y los estándares de belleza que promueve esta estética. La respuesta más común sobre si estos hábitos generan bienestar o carga adicional fue “${bienestar.label}” (${bienestar.pct}%) — un patrón que va en la misma dirección que la asociación entre comparación social y malestar reportada en la literatura.`;
+
+    const pctInternet = Math.round((ENCC_DATA.usaInternet.SI / ENCC_DATA.n) * 100);
+    const pct18a29 = Math.round((ENCC_DATA.gruposEdad["18 a 29 años"] / ENCC_DATA.n) * 100);
+    $("#lit-encc").innerHTML =
+      `Puesto en contexto con la ENCC 2022-2023, el ${pctInternet}% de la población argentina relevada usa internet y un ${pct18a29}% tiene entre 18 y 29 años — la franja etaria más expuesta a la estética “That Girl” en plataformas visuales. Esa base de acceso masivo a internet es justamente la condición que hace posible la escala de exposición que describen tanto el estudio de Nazyrova et al. (2026) como nuestra propia muestra: no se trata de un fenómeno de nicho, sino de un patrón que corre en paralelo a la conectividad cotidiana de la población joven.`;
   }
 
   // ---------- init ----------
@@ -442,14 +506,9 @@
     try {
       const encuestaRows = await parseCsv(SHEET_ENCUESTA_URL);
       if (!encuestaRows || encuestaRows.length < 2) throw new Error("La hoja de encuesta llegó vacía.");
-      renderEncuesta(encuestaRows);
-
-      try {
-        const enccRows = await parseCsv(SHEET_ENCC_URL);
-        renderContexto(enccRows);
-      } catch (e) {
-        $("#context-missing").style.display = "block";
-      }
+      const surveyData = renderEncuesta(encuestaRows);
+      renderContexto();
+      renderAnalisisCruzado(surveyData);
 
       $("#updated-at").textContent = "Última carga: " + new Date().toLocaleString("es-AR");
       loadingEl.style.display = "none";
