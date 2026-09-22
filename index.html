@@ -110,6 +110,23 @@
   .chart-wrap{position:relative;height:260px;}
   .chart-wrap.tall{height:320px;}
 
+  /* tracker rows (estética "habit tracker") */
+  .tracker-card .sub{margin-bottom:10px;}
+  .tracker-list{display:flex;flex-direction:column;}
+  .tracker-row{
+    display:grid;grid-template-columns:22px 1fr 90px 40px;align-items:center;gap:10px;
+    padding:9px 0;border-bottom:1px solid var(--line);
+  }
+  .tracker-row:last-child{border-bottom:none;}
+  .tracker-check{
+    width:18px;height:18px;border-radius:5px;background:var(--matcha);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;
+  }
+  .tracker-label{font-size:0.85rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .tracker-track{height:8px;border-radius:999px;background:var(--clay-soft);overflow:hidden;}
+  .tracker-fill{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--matcha),var(--gold));}
+  .tracker-pct{font-size:0.8rem;font-weight:700;color:var(--matcha-dark);text-align:right;}
+
   section.context{margin-top:70px;padding-top:40px;border-top:1px solid var(--line);}
   section.context .cluster-head h2{color:var(--ink-soft);}
   .context-note{
@@ -376,6 +393,34 @@
     container.appendChild(div);
   }
 
+  function makeTrackerCard(container, { title, sub }) {
+    const card = document.createElement("div");
+    card.className = "chart-card tracker-card";
+    card.innerHTML = `
+      <h3>${title}</h3>
+      ${sub ? `<p class="sub">${sub}</p>` : ""}
+      <div class="tracker-list"></div>
+    `;
+    container.appendChild(card);
+    return card.querySelector(".tracker-list");
+  }
+
+  function trackerRows(listEl, data) {
+    const total = data.values.reduce((a, b) => a + b, 0) || 1;
+    data.labels.forEach((label, i) => {
+      const pct = Math.round((data.values[i] / total) * 100);
+      const row = document.createElement("div");
+      row.className = "tracker-row";
+      row.innerHTML = `
+        <span class="tracker-check">✓</span>
+        <span class="tracker-label" title="${label}">${truncate(label, 34)}</span>
+        <span class="tracker-track"><span class="tracker-fill" style="width:${pct}%"></span></span>
+        <span class="tracker-pct">${pct}%</span>
+      `;
+      listEl.appendChild(row);
+    });
+  }
+
   function topAnswer(rows, colIndex) {
     const { labels, values } = countBy(rows, colIndex);
     if (!labels.length) return { label: "—", pct: 0 };
@@ -415,17 +460,17 @@
 
     // Cluster 1 — Consumo y exposición
     const gConsumo = $("#grid-consumo");
-    barChart(
-      makeCard(gConsumo, { title: "Edad de las encuestadas", sub: "Cantidad de respuestas por edad" }),
-      countBy(data, COL.edad), { color: PALETTE[0] }
+    trackerRows(
+      makeTrackerCard(gConsumo, { title: "Edad de las encuestadas", sub: "Cantidad de respuestas por edad" }),
+      countBy(data, COL.edad)
     );
-    barChart(
-      makeCard(gConsumo, { title: "Horas diarias en TikTok / Instagram / Pinterest" }),
-      countBy(data, COL.horasConsumo), { color: PALETTE[1], horizontal: true }
+    trackerRows(
+      makeTrackerCard(gConsumo, { title: "Horas diarias en TikTok / Instagram / Pinterest" }),
+      countBy(data, COL.horasConsumo)
     );
-    barChart(
-      makeCard(gConsumo, { title: "Frecuencia de exposición a la estética “That Girl”", tall: true }),
-      countBy(data, COL.frecuenciaEstetica), { color: PALETTE[2], horizontal: true, labelLen: 34 }
+    trackerRows(
+      makeTrackerCard(gConsumo, { title: "Frecuencia de exposición a la estética “That Girl”" }),
+      countBy(data, COL.frecuenciaEstetica)
     );
 
     // Cluster 2 — Percepción
