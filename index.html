@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>That Girl — The Other Girls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
@@ -62,24 +62,25 @@
   /* ---------- layout ---------- */
   #app{display:none;max-width:1180px;margin:0 auto;padding:0 28px 90px;}
   header.hero{
-    padding:64px 0 40px;border-bottom:1px solid var(--line);
-    display:flex;flex-direction:column;gap:14px;
+    padding:72px 0 44px;border-bottom:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;
   }
   .kicker{
     font-size:0.82rem;color:var(--matcha-dark);font-weight:600;
     letter-spacing:.01em;
   }
   header.hero h1{
-    font-size:clamp(2.4rem,6vw,4rem);font-weight:800;margin:0;
-    line-height:1.02;max-width:14ch;
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.6rem,6.5vw,4.6rem);font-weight:500;margin:0;
+    line-height:1.12;max-width:18ch;
   }
-  header.hero h1 em{font-style:italic;color:var(--clay);}
+  header.hero h1 em{font-style:italic;font-weight:600;color:var(--matcha-dark);}
   header.hero .lede{
     max-width:56ch;font-size:1.05rem;color:var(--ink-soft);margin:6px 0 0;
   }
   .credit-line{
     font-size:0.85rem;color:var(--ink-soft);margin-top:18px;
-    display:flex;gap:22px;flex-wrap:wrap;
+    display:flex;gap:22px;flex-wrap:wrap;justify-content:center;
   }
   .credit-line b{color:var(--ink);font-weight:600;}
 
