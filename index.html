@@ -101,6 +101,8 @@
   .cluster-head h2{font-size:1.5rem;font-weight:700;margin:0;}
   .cluster-head h2.script{font-family:'Alex Brush',cursive;font-weight:400;font-size:2.1rem;color:var(--matcha-dark);}
   .cluster-head .n{font-size:0.85rem;color:var(--matcha-dark);font-weight:600;}
+  .cluster-head .n.n-serif{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:1.4rem;}
+  #kpis-contexto .kpi .num{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;}
   .cluster-head::after{content:"";flex:1;height:1px;background:var(--line);}
 
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;background:transparent;border:none;}
@@ -186,7 +188,7 @@
   </header>
 
   <section class="cluster" style="margin-top:44px;">
-    <div class="cluster-head"><h2 class="script">El problema de investigación</h2><span class="n">00</span></div>
+    <div class="cluster-head"><h2 class="script">El problema de investigación</h2><span class="n n-serif">00</span></div>
     <div class="grid single">
       <div class="analysis-card">
         <p>La tendencia “That Girl” propone una serie de hábitos de autocuidado, productividad y organización — madrugar, hacer ejercicio, journaling, desayunos verdes — que circulan como una estética “clean” y reproducible en TikTok, Instagram y Pinterest. El punto de partida de esta investigación no es el hábito en sí, sino la forma en que se presenta y se apropia: una rutina pensada para inspirar también puede convertirse en una vara con la que las usuarias miden su propia vida.</p>
@@ -243,7 +245,7 @@
   <section class="context">
     <div class="cluster-head"><h2>Contexto poblacional</h2><span class="n">ENCC 2022-2023</span></div>
     <p class="context-note">La ENCC (2022-2023, n=3.380) permite ampliar el análisis más allá de la relación directa entre jóvenes y redes: releva variables sociodemográficas junto con módulos de internet, cine, lectura, radio, música, TV, videojuegos y teatro, evitando reducir a la audiencia a una única práctica digital. No corresponde a la muestra de la encuesta propia.</p>
-    <div class="kpis" id="kpis-contexto"></div>
+    <div class="kpis kpis-numeros" id="kpis-contexto"></div>
     <div class="grid" id="grid-contexto"></div>
   </section>
 
