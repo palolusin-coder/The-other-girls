@@ -5,32 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>That Girl — The Other Girls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
   :root{
-    --paper:#FAF7F1;
+    --paper:#FFF6FA;
     --card:#FFFFFF;
-    --ink:#262019;
-    --ink-soft:#7A7266;
-    --line:#E4DCC9;
-    --matcha:#8B9A6B;
-    --matcha-dark:#5F6E44;
-    --clay:#C1685C;
-    --clay-soft:#F1DAD3;
-    --gold:#B98F3E;
+    --ink:#202020;
+    --ink-soft:#8C6B78;
+    --line:#F4D4E6;
+    --matcha:#CC498F;
+    --matcha-dark:#9C3868;
+    --clay:#E6789F;
+    --clay-soft:#F9E4EE;
+    --gold:#F0A8C8;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'Inter',sans-serif;
+    font-family:'Urbanist',sans-serif;
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  h1,h2,h3,.serif{font-family:'Urbanist',sans-serif;font-weight:700;}
 
   /* ---------- loading / error ---------- */
   #loading{
@@ -48,14 +48,14 @@
   #error{
     display:none;max-width:520px;margin:120px auto;padding:28px 30px;
     background:var(--card);border:1px solid var(--clay-soft);border-left:4px solid var(--clay);
-    border-radius:2px;
+    border-radius:20px;box-shadow:0 6px 24px rgba(204,73,143,0.08);
   }
   #error h2{margin:0 0 8px;font-size:1.3rem;}
   #error p{color:var(--ink-soft);margin:0 0 18px;font-size:0.95rem;}
   #retry{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;
-    background:var(--ink);color:var(--paper);border:none;padding:10px 20px;
-    border-radius:2px;cursor:pointer;
+    font-family:'Urbanist',sans-serif;font-weight:700;font-size:0.9rem;
+    background:var(--matcha);color:#FFFFFF;border:none;padding:11px 26px;
+    border-radius:999px;cursor:pointer;
   }
   #retry:hover{background:var(--matcha-dark);}
 
@@ -70,7 +70,7 @@
     letter-spacing:.01em;
   }
   header.hero h1{
-    font-size:clamp(2.4rem,6vw,4rem);font-weight:500;margin:0;
+    font-size:clamp(2.4rem,6vw,4rem);font-weight:800;margin:0;
     line-height:1.02;max-width:14ch;
   }
   header.hero h1 em{font-style:italic;color:var(--clay);}
@@ -90,20 +90,20 @@
   }
   .kpi{padding:22px 22px 22px 0;border-right:1px solid var(--line);}
   .kpi:last-child{border-right:none;}
-  .kpi .num{font-family:'Fraunces',serif;font-size:2.3rem;font-weight:500;display:block;color:var(--matcha-dark);}
+  .kpi .num{font-family:'Urbanist',sans-serif;font-size:2.3rem;font-weight:800;display:block;color:var(--matcha-dark);}
   .kpi .lbl{font-size:0.82rem;color:var(--ink-soft);max-width:20ch;display:block;margin-top:4px;}
 
   /* sections */
   section.cluster{margin-top:64px;}
   .cluster-head{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;}
-  .cluster-head h2{font-size:1.5rem;font-weight:500;margin:0;}
-  .cluster-head .n{font-size:0.85rem;color:var(--ink-soft);}
+  .cluster-head h2{font-size:1.5rem;font-weight:700;margin:0;}
+  .cluster-head .n{font-size:0.85rem;color:var(--matcha-dark);font-weight:600;}
   .cluster-head::after{content:"";flex:1;height:1px;background:var(--line);}
 
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;background:transparent;border:none;}
   .grid.single{grid-template-columns:1fr;}
-  .chart-card{background:var(--card);padding:24px 24px 18px;}
-  .chart-card h3{font-size:0.98rem;font-weight:600;margin:0 0 4px;max-width:44ch;}
+  .chart-card{background:var(--card);padding:24px 24px 18px;border-radius:18px;border:1px solid var(--line);box-shadow:0 4px 18px rgba(204,73,143,0.06);}
+  .chart-card h3{font-size:0.98rem;font-weight:700;margin:0 0 4px;max-width:44ch;}
   .chart-card .sub{font-size:0.8rem;color:var(--ink-soft);margin:0 0 14px;}
   .chart-wrap{position:relative;height:260px;}
   .chart-wrap.tall{height:320px;}
@@ -114,7 +114,7 @@
     font-size:0.85rem;color:var(--ink-soft);max-width:60ch;margin:-8px 0 26px;
   }
 
-  .analysis-card{background:var(--card);padding:30px 34px;border:1px solid var(--line);}
+  .analysis-card{background:var(--card);padding:30px 34px;border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 18px rgba(204,73,143,0.06);}
   .analysis-card p{font-size:0.98rem;line-height:1.7;margin:0 0 16px;max-width:78ch;}
   .analysis-card p:last-of-type{margin-bottom:0;}
   .citation{
@@ -155,14 +155,25 @@
 
   <header class="hero">
     <span class="kicker">Investigación · The Other Girls</span>
-    <h1>¿Cómo afecta la tendencia <em>“That Girl”</em> en las jóvenes?</h1>
-    <p class="lede">Un relevamiento propio sobre consumo, percepción y presión en torno a la estética de rutinas “perfectas” en TikTok, Instagram y Pinterest, contrastado con datos poblacionales de referencia (ENCC).</p>
+    <h1>¿Cómo influye la tendencia <em>“That Girl”</em> en las emociones de las jóvenes?</h1>
+    <p class="lede">¿Qué pasa cuando aquello que vemos en redes como una forma de sentirnos mejor termina generando presión, frustración o culpa? Cruzamos nuestra propia encuesta con la Encuesta Nacional de Consumos Culturales (ENCC) y con antecedentes académicos para observar esa tensión, sin emitir un juicio de valor: cada experiencia es individual y subjetiva.</p>
     <div class="credit-line">
       <span><b>Equipo:</b> The Other Girls</span>
+      <span><b>Audiencia:</b> mujeres de 20 a 30 años</span>
       <span><b>Fuente primaria:</b> encuesta propia (Google Forms)</span>
       <span><b>Fuente de contexto:</b> Base ENCC</span>
     </div>
   </header>
+
+  <section class="cluster" style="margin-top:44px;">
+    <div class="cluster-head"><h2>El problema de investigación</h2><span class="n">00</span></div>
+    <div class="grid single">
+      <div class="analysis-card">
+        <p>La tendencia “That Girl” propone una serie de hábitos de autocuidado, productividad y organización — madrugar, hacer ejercicio, journaling, desayunos verdes — que circulan como una estética “clean” y reproducible en TikTok, Instagram y Pinterest. El punto de partida de esta investigación no es el hábito en sí, sino la forma en que se presenta y se apropia: una rutina pensada para inspirar también puede convertirse en una vara con la que las usuarias miden su propia vida.</p>
+        <p>La hipótesis de partida contempla reconocimientos diversos y no excluyentes: por un lado, motivación, bienestar o inspiración; por otro, presión, frustración y culpa cuando hay distancia entre lo que circula en redes y las condiciones reales de tiempo y dinero de quienes intentan sostener esos hábitos. Para explorar esa tensión combinamos tres fuentes: una encuesta propia diseñada específicamente sobre “That Girl”, la Encuesta Nacional de Consumos Culturales (ENCC 2022-2023) para ampliar la mirada más allá de las redes, y un estudio académico publicado en Frontiers in Computer Science sobre ansiedad digital en mujeres.</p>
+      </div>
+    </div>
+  </section>
 
   <div class="kpis" id="kpis"></div>
 
@@ -190,7 +201,7 @@
     <div class="cluster-head"><h2>Diálogo con la literatura académica</h2><span class="n">05</span></div>
     <div class="grid single">
       <div class="analysis-card">
-        <p>Un estudio reciente publicado en <em>Frontiers in Computer Science</em> (Nazyrova et al., 2026) analizó más de 30 investigaciones sobre redes sociales y salud mental en mujeres, y las complementó con una encuesta propia a usuarias de entre 16 y 35 años. Su hallazgo central: a mayor tiempo diario de uso, mayores niveles de ansiedad, comparación social y descontento con la imagen corporal. En su muestra, alrededor del 70% notó más ansiedad tras un uso prolongado y cerca del 80% dijo estar expuesta con frecuencia a contenido centrado en la apariencia; quienes superaban las tres horas diarias mostraban niveles de ansiedad y comparación social notablemente más altos que quienes usaban menos de dos horas. También encontraron que un 40% había atravesado situaciones de ciberacoso, y de ese grupo, más de dos tercios reportó un aumento de la ansiedad.</p>
+        <p>Según el resumen del estudio “Ansiedad digital: efectos psicológicos de las redes sociales en las mujeres”, publicado en <em>Frontiers in Computer Science</em> (Nazyrova et al., 2026), aproximadamente 7 de cada 10 participantes señalaron sentir más ansiedad o estrés después de un uso intenso de redes sociales, cerca del 60% dijo compararse con frecuencia con otras personas que ve en internet, y casi el 80% había estado expuesto a contenido centrado en la apariencia física. El promedio de uso diario registrado fue de 3,1 horas. El estudio también encontró que a mayor tiempo de permanencia en redes tienden a aumentar la ansiedad, la comparación social y la insatisfacción con el propio cuerpo — sin que esto implique que la tendencia “That Girl” por sí sola produzca esos efectos, sino que aporta un antecedente para leer el contexto en el que circula.</p>
         <p id="lit-propia">Cargando cruce con nuestros datos…</p>
         <p id="lit-encc">Cargando cruce con la ENCC…</p>
         <div class="citation">
@@ -200,15 +211,24 @@
     </div>
   </section>
 
+  <section class="cluster">
+    <div class="cluster-head"><h2>Conclusión</h2><span class="n">06</span></div>
+    <div class="grid single">
+      <div class="analysis-card">
+        <p>Cruzar estas tres fuentes permite formular una hipótesis alrededor de una tensión, más que de una respuesta cerrada: un mismo contenido puede ser recibido como inspiración o como presión, según quién lo consume, cómo lo interpreta y bajo qué condiciones concretas de tiempo, dinero y contexto lo intenta sostener. La encuesta propia permitió organizar el problema alrededor de esas consecuencias subjetivas; la ENCC amplió la mirada hacia perfiles de consumo cultural más allá de las redes; y el estudio de Frontiers aportó un antecedente sobre la relación entre uso de redes, comparación social y ansiedad. El objetivo de este trabajo no es emitir un juicio sobre la tendencia “That Girl”, sino hacer visible una experiencia cotidiana y abrir una pregunta sobre la relación entre las representaciones de vida que consumimos y las emociones que nos producen.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="context">
     <div class="cluster-head"><h2>Contexto poblacional</h2><span class="n">ENCC 2022-2023</span></div>
-    <p class="context-note">Distribución de la Encuesta Nacional de Consumos Culturales (2022-2023, n=3.380), usada como referencia demográfica y de acceso a internet — no corresponde a la muestra de la encuesta propia.</p>
+    <p class="context-note">La ENCC (2022-2023, n=3.380) permite ampliar el análisis más allá de la relación directa entre jóvenes y redes: releva variables sociodemográficas junto con módulos de internet, cine, lectura, radio, música, TV, videojuegos y teatro, evitando reducir a la audiencia a una única práctica digital. No corresponde a la muestra de la encuesta propia.</p>
     <div class="kpis" id="kpis-contexto"></div>
     <div class="grid" id="grid-contexto"></div>
   </section>
 
   <footer>
-    <span>Encuesta propia: datos en vivo vía CSV público · Base ENCC: dataset embebido (n=3.380).</span>
+    <span>Basado en el Informe de Investigación (Taller Transmedia) · Encuesta propia en vivo vía CSV · Base ENCC embebida (n=3.380).</span>
     <span id="updated-at"></span>
   </footer>
 
@@ -232,7 +252,7 @@
     usaInternet: {"SI":3102,"NO":278},
   };
 
-  const PALETTE = ["#8B9A6B","#C1685C","#B98F3E","#5F6E44","#8E7A9C","#4F6B8C","#A65C53","#6B7A8F"];
+  const PALETTE = ["#CC498F","#E6789F","#9C3868","#F4A6C6","#B5678F","#7A2F52","#D98CB3","#F0A8C8"];
 
   const $ = (sel) => document.querySelector(sel);
   const loadingEl = $("#loading");
@@ -314,8 +334,8 @@
           title: (items) => data.labels[items[0].dataIndex],
         } } },
         scales: {
-          x: { grid: { display: !opts.horizontal, color: "#EFE9DA" }, ticks: { font: { family: "Inter", size: 11 }, color: "#7A7266" } },
-          y: { grid: { display: opts.horizontal, color: "#EFE9DA" }, ticks: { font: { family: "Inter", size: 11 }, color: "#7A7266" }, beginAtZero: true },
+          x: { grid: { display: !opts.horizontal, color: "#F9E4EE" }, ticks: { font: { family: "Urbanist", size: 11 }, color: "#8C6B78" } },
+          y: { grid: { display: opts.horizontal, color: "#F9E4EE" }, ticks: { font: { family: "Urbanist", size: 11 }, color: "#8C6B78" }, beginAtZero: true },
         },
       },
     });
@@ -340,7 +360,7 @@
         plugins: {
           legend: {
             position: "bottom",
-            labels: { boxWidth: 10, font: { family: "Inter", size: 11 }, color: "#262019", padding: 12 },
+            labels: { boxWidth: 10, font: { family: "Urbanist", size: 11 }, color: "#202020", padding: 12 },
           },
         },
       },
