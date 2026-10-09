@@ -111,6 +111,20 @@
     border-left:4px solid var(--clay);border-radius:0 14px 14px 0;
     font-size:0.9rem;color:var(--ink);max-width:78ch;
   }
+  /* videos analizados */
+  .video-card{margin-bottom:14px;}
+  .video-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:6px;}
+  .video-meta{font-size:0.82rem;color:var(--ink-soft);margin-bottom:4px;}
+  .video-title{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:1.35rem;margin:0;line-height:1.25;max-width:34ch;}
+  .video-link{
+    font-family:'Urbanist',sans-serif;font-weight:700;font-size:0.9rem;
+    background:var(--matcha);color:#FFFFFF;text-decoration:none;
+    padding:11px 26px;border-radius:999px;white-space:nowrap;
+  }
+  .video-link:hover{background:var(--matcha-dark);}
+  .video-label{font-size:0.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--matcha-dark);margin:20px 0 8px;}
+  .video-card .kpis-lit{margin:0;}
+  .video-card .lit-nota{margin:18px 0 0;}
   .cluster-head::after{content:"";flex:1;height:1px;background:var(--line);}
 
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;background:transparent;border:none;}
@@ -256,7 +270,57 @@
   </section>
 
   <section class="cluster">
-    <div class="cluster-head"><h2 class="script">Conclusión</h2><span class="n">06</span></div>
+    <div class="cluster-head"><h2 class="script">Contenido analizado</h2><span class="n">06</span></div>
+    <p class="lit-caption">Videos de la tendencia That Girl. Las métricas corresponden a una captura de pantalla del 8 de octubre de 2026 y pueden haber cambiado desde entonces.</p>
+    <div class="grid single">
+
+      <div class="analysis-card video-card" id="video-tiktok">
+        <div class="video-top">
+          <div>
+            <div class="video-meta">TikTok · Mariana 🎀 · publicado el 29 de octubre de 2024</div>
+            <h3 class="video-title">“hábitos de una that girl 🎀🌸 #thatgirl #fyp …”</h3>
+          </div>
+          <a class="video-link" href="https://share.google/HWtX7vU4zEmUFbjAl" target="_blank" rel="noopener">Ver video ↗</a>
+        </div>
+
+        <div class="video-label">Interacciones visibles</div>
+        <div class="kpis kpis-lit">
+          <div class="kpi"><span class="num">≈ 33,9 mil</span><span class="lbl">likes</span></div>
+          <div class="kpi"><span class="num">228</span><span class="lbl">comentarios</span></div>
+          <div class="kpi"><span class="num">5.558</span><span class="lbl">guardados</span></div>
+          <div class="kpi"><span class="num">613</span><span class="lbl">compartidos</span></div>
+        </div>
+
+        <div class="video-label">Lectura de las métricas</div>
+        <div class="kpis kpis-lit">
+          <div class="kpi"><span class="num">≈ 40,3 mil</span><span class="lbl">interacciones visibles en total (suma de las cuatro anteriores)</span></div>
+          <div class="kpi"><span class="num">≈ 16%</span><span class="lbl">guardados sobre el total de likes</span></div>
+          <div class="kpi"><span class="num">≈ 1,8%</span><span class="lbl">compartidos sobre el total de likes</span></div>
+          <div class="kpi"><span class="num">≈ 0,7%</span><span class="lbl">comentarios sobre el total de likes</span></div>
+        </div>
+
+        <div class="video-label">Análisis de alcance</div>
+        <p>La captura no muestra la cantidad de reproducciones, por lo que no es posible medir el alcance (vistas o cuentas alcanzadas) ni calcular una tasa de interacción sobre vistas. Lo que sí se observa es la interacción acumulada desde la publicación: unas 40,3 mil interacciones visibles.</p>
+        <p>El 84% de esas interacciones son likes, la reacción más liviana. Los guardados son la segunda más frecuente (≈ 14%), con unos 16 guardados por cada 100 likes: una proporción alta que suele leerse como intención de volver al contenido o de replicar lo que muestra, algo coherente con un video presentado como una lista de “hábitos”. En cambio, los compartidos (≈ 1,5%) y los comentarios (≈ 0,6%) son bajos, lo que sugiere un consumo más individual que conversacional: se mira y se guarda más de lo que se comenta o se recomienda a otras personas.</p>
+        <div class="lit-nota">Se trata de una sola pieza y de datos tomados de una captura (los likes figuran redondeados a 33,9 mil). La lectura describe este video y no permite generalizar sobre la tendencia.</div>
+      </div>
+
+      <div class="analysis-card video-card" id="video-youtube">
+        <div class="video-top">
+          <div>
+            <div class="video-meta">YouTube Shorts</div>
+            <h3 class="video-title">Short de YouTube</h3>
+          </div>
+          <a class="video-link" href="https://www.youtube.com/shorts/JJcNlMSLhis" target="_blank" rel="noopener">Ver video ↗</a>
+        </div>
+        <div class="lit-nota">Métricas y análisis de alcance por completar.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cluster">
+    <div class="cluster-head"><h2 class="script">Conclusión</h2><span class="n">07</span></div>
     <div class="grid single">
       <div class="analysis-card">
         <p>Cruzar estas tres fuentes permite formular una hipótesis alrededor de una tensión, más que de una respuesta cerrada: un mismo contenido puede ser recibido como inspiración o como presión, según quién lo consume, cómo lo interpreta y bajo qué condiciones concretas de tiempo, dinero y contexto lo intenta sostener. La encuesta propia permitió organizar el problema alrededor de esas consecuencias subjetivas; la ENCC amplió la mirada hacia perfiles de consumo cultural más allá de las redes; y el estudio de Frontiers aportó un antecedente sobre la relación entre uso de redes, comparación social y ansiedad. El objetivo de este trabajo no es emitir un juicio sobre la tendencia “That Girl”, sino hacer visible una experiencia cotidiana y abrir una pregunta sobre la relación entre las representaciones de vida que consumimos y las emociones que nos producen.</p>
