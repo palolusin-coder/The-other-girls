@@ -102,7 +102,15 @@
   .cluster-head h2.script{font-family:'Alex Brush',cursive;font-weight:400;font-size:2.1rem;color:var(--matcha-dark);}
   .cluster-head .n{font-size:0.85rem;color:var(--matcha-dark);font-weight:600;}
   .cluster-head .n.n-serif{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;font-size:1.4rem;}
-  #kpis-contexto .kpi .num, #kpis .kpi .num{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;}
+  #kpis-contexto .kpi .num, #kpis .kpi .num, .kpis-lit .kpi .num{font-family:'Playfair Display',serif;font-style:italic;font-weight:600;}
+  .kpis-lit{margin:0;}
+  .kpis-lit .kpi .lbl{max-width:26ch;}
+  .lit-caption{font-size:0.85rem;color:var(--ink-soft);max-width:60ch;margin:0 0 14px;}
+  .lit-nota{
+    margin:14px 0 26px;padding:14px 20px;background:var(--clay-soft);
+    border-left:4px solid var(--clay);border-radius:0 14px 14px 0;
+    font-size:0.9rem;color:var(--ink);max-width:78ch;
+  }
   .cluster-head::after{content:"";flex:1;height:1px;background:var(--line);}
 
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;background:transparent;border:none;}
@@ -221,6 +229,20 @@
 
   <section class="cluster">
     <div class="cluster-head"><h2 class="script">Diálogo con la literatura académica</h2><span class="n">05</span></div>
+    <p class="lit-caption">Resultados del estudio de Nazyrova et al. (2026) sobre ansiedad digital en mujeres. No pertenecen a la muestra de nuestra encuesta.</p>
+    <div class="kpis kpis-lit" id="kpis-literatura">
+      <div class="kpi"><span class="num">≈ 7 de 10</span><span class="lbl">sintió más ansiedad o estrés después de usar mucho las redes sociales</span></div>
+      <div class="kpi"><span class="num">≈ 60%</span><span class="lbl">se compara con frecuencia con otras personas que ve en internet</span></div>
+      <div class="kpi"><span class="num">≈ 80%</span><span class="lbl">estuvo expuesta a contenido sobre la apariencia física</span></div>
+      <div class="kpi"><span class="num">3,1 h</span><span class="lbl">de uso diario de redes sociales en promedio</span></div>
+    </div>
+    <div class="kpis kpis-lit" id="kpis-literatura-niveles">
+      <div class="kpi"><span class="num">1.ª</span><span class="lbl">experiencia más frecuente: la comparación con otras personas</span></div>
+      <div class="kpi"><span class="num">2.ª</span><span class="lbl">experiencia más frecuente: la ansiedad</span></div>
+      <div class="kpi"><span class="num">Moderada</span><span class="lbl">insatisfacción con el propio cuerpo</span></div>
+      <div class="kpi"><span class="num">Moderado</span><span class="lbl">nivel de ánimo depresivo</span></div>
+    </div>
+    <p class="lit-nota">A más tiempo en redes sociales, tiende a ser mayor la ansiedad, la comparación social y la insatisfacción con el cuerpo: el estudio las describe como experiencias relacionadas entre sí.</p>
     <div class="grid single">
       <div class="analysis-card">
         <p>Según el resumen del estudio “Ansiedad digital: efectos psicológicos de las redes sociales en las mujeres”, publicado en <em>Frontiers in Computer Science</em> (Nazyrova et al., 2026), aproximadamente 7 de cada 10 participantes señalaron sentir más ansiedad o estrés después de un uso intenso de redes sociales, cerca del 60% dijo compararse con frecuencia con otras personas que ve en internet, y casi el 80% había estado expuesto a contenido centrado en la apariencia física. El promedio de uso diario registrado fue de 3,1 horas. El estudio también encontró que a mayor tiempo de permanencia en redes tienden a aumentar la ansiedad, la comparación social y la insatisfacción con el propio cuerpo — sin que esto implique que la tendencia “That Girl” por sí sola produzca esos efectos, sino que aporta un antecedente para leer el contexto en el que circula.</p>
